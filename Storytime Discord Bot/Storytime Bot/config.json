@@ -1,4 +1,4 @@
 ﻿{
-  "token": "Token", //The bot's token would be here.
+  "token": "Token",
   "prefix": "$"
 }
