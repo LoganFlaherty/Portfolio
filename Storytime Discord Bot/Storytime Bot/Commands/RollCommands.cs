@@ -2,12 +2,7 @@
 using DSharpPlus.SlashCommands;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Storytime_Bot.Commands
@@ -27,14 +22,16 @@ namespace Storytime_Bot.Commands
             Description = string,
             Color = DiscordColor.White
         };
-        await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Message optional"));
+        await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, 
+            new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Message optional"));
         await ctx.Channel.SendMessageAsync(embed: eMessage);
      */
 
     public class RollCommands : ApplicationCommandModule
     {
         [SlashCommand("roll", "To roll dice")]
-        public async Task Roll(InteractionContext ctx, [Option("success_range", "Only enter the beginning of the range, 12 by default")] double SR = 12, [Option("dice_amount", "Enter the number of dice being rolled, 1 by default")] double dice = 1)
+        public async Task Roll(InteractionContext ctx, [Option("success_range", "Only enter the beginning of the range, 12 by default")] double SR = 12, 
+            [Option("dice_amount", "Enter the number of dice being rolled, 1 by default")] double dice = 1)
         {
             List<int> rollList = new List<int>();
             string str = "{";
@@ -84,7 +81,8 @@ namespace Storytime_Bot.Commands
                 Description = str,
                 Color = DiscordColor.White
             };
-            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Rolling dice..."));
+            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, 
+                new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Rolling dice..."));
             await ctx.Channel.SendMessageAsync(embed: eMessage);
         }
 
@@ -126,7 +124,8 @@ namespace Storytime_Bot.Commands
 
             string user = $"{ctx.Member}";
             string characterPath = CharacterPath(user);
-            Character character = new Character(name, expertise, expertisePrestige, faith, faithPrestige, influence, influencePrestige, perception, perceptionPrestige, physique, physiquePrestige, tags);
+            Character character = new Character(name, expertise, expertisePrestige, faith, faithPrestige, influence, 
+                influencePrestige, perception, perceptionPrestige, physique, physiquePrestige, tags);
             List<Character> characterList = Import(characterPath);
             characterList.Add(character);
             Export(characterPath, characterList);
@@ -140,7 +139,8 @@ namespace Storytime_Bot.Commands
                 Description = $"Complete!\n\n{msgStr}",
                 Color = DiscordColor.White
             };
-            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Creating character..."));
+            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, 
+                new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Creating character..."));
             await ctx.Channel.SendMessageAsync(embed: eMessage);
         }
 
@@ -182,7 +182,8 @@ namespace Storytime_Bot.Commands
                 Description = msgStr,
                 Color = DiscordColor.White
             };
-            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Loading character..."));
+            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, 
+                new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Loading character..."));
             await ctx.Channel.SendMessageAsync(embed: eMessage);
         }
 
@@ -215,7 +216,8 @@ namespace Storytime_Bot.Commands
                 Description = msgStr,
                 Color = DiscordColor.White
             };
-            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Loading character..."));
+            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, 
+                new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Loading character..."));
             await ctx.Channel.SendMessageAsync(embed: eMessage);
         }
 
@@ -268,7 +270,8 @@ namespace Storytime_Bot.Commands
                 Description = msgStr,
                 Color = DiscordColor.White
             };
-            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Editing character..."));
+            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, 
+                new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Editing character..."));
             await ctx.Channel.SendMessageAsync(embed: eMessage);
         }
 
@@ -301,7 +304,8 @@ namespace Storytime_Bot.Commands
                 Description = msgStr,
                 Color = DiscordColor.White
             };
-            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Deleting character..."));
+            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, 
+                new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Deleting character..."));
             await ctx.Channel.SendMessageAsync(embed: eMessage);
         }
 
@@ -339,7 +343,8 @@ namespace Storytime_Bot.Commands
                 Description = msgStr,
                 Color = DiscordColor.White
             };
-            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Resting character..."));
+            await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, 
+                new DSharpPlus.Entities.DiscordInteractionResponseBuilder().WithContent("Resting character..."));
             await ctx.Channel.SendMessageAsync(embed: eMessage);
         }
 
@@ -514,7 +519,7 @@ namespace Storytime_Bot.Commands
         //Creates a path with discord user id.
         private string CharacterPath(string user)
         {
-            return $@"C:\Users\Logan\OneDrive\Documents\Private Projects\Discord\Storytime Bot\Storytime Bot\Commands\CharacterData\{user}.txt";
+            return $@"..\..\Commands\CharacterData\{user}.txt";
         }
         
         //Exports character data to a user file.
@@ -574,7 +579,7 @@ namespace Storytime_Bot.Commands
             return list;
         }
 
-        //For handling the long code to handle user choice in editing which attribute.
+        //For handling the long code of user choice in editing which attribute.
         private void EditCharacterProperty(Character character, string choice, string input)
         {
             switch (choice)
