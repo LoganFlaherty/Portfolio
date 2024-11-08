@@ -1,5 +1,4 @@
-﻿using DSharpPlus.CommandsNext;
-using DSharpPlus.EventArgs;
+using DSharpPlus.CommandsNext;
 using DSharpPlus.Interactivity;
 using DSharpPlus;
 using Newtonsoft.Json;
@@ -10,7 +9,6 @@ using System.Threading.Tasks;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
 using Storytime_Bot.Commands;
-using System.Xml.Linq;
 
 namespace Storytime_Bot
 {
@@ -18,12 +16,12 @@ namespace Storytime_Bot
     {
         //Fields
         public DiscordClient Client { get; private set; }
-        public InteractivityExtension Interactivity { get; private set; }
         public CommandsNextExtension Commands { get; private set; }
 
         //Methods
         public async Task RunAsync()
         {
+            //Load config and intialize
             var json = string.Empty;
             string relativePath = Path.Combine("..", "..", "config.json");
             using (var fs = File.OpenRead(relativePath))
@@ -54,18 +52,14 @@ namespace Storytime_Bot
                 EnableDefaultHelp = false,
             };
 
+            //Register Command to a specified guild.
             Commands = Client.UseCommandsNext(commandsConfig);
-
             var slashCommandsConfig = Client.UseSlashCommands();
-            slashCommandsConfig.RegisterCommands<RollCommands>(guildID); //Insert Server ID aka GuildID Here
+            slashCommandsConfig.RegisterCommands<RollCommands>(1047929615827619890);
 
+            //Connects client
             await Client.ConnectAsync();
             await Task.Delay(-1);
-        }
-
-        private Task OnClientReady(ReadyEventArgs e)
-        {
-            return Task.CompletedTask;
         }
     }
 }
