@@ -55,7 +55,7 @@ namespace Storytime_Bot
             //Register Command to a specified guild.
             Commands = Client.UseCommandsNext(commandsConfig);
             var slashCommandsConfig = Client.UseSlashCommands();
-            slashCommandsConfig.RegisterCommands<RollCommands>(1047929615827619890);
+            slashCommandsConfig.RegisterCommands<RollCommands>(guildId); //Insert your server Id here.
 
             //Connects client
             await Client.ConnectAsync();
