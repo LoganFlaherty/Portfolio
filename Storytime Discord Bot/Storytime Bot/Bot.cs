@@ -50,7 +50,7 @@ namespace Storytime_Bot
 
             //Register slash commands to a specified guild.
             var slashCommandsConfig = Client.UseSlashCommands();
-            slashCommandsConfig.RegisterCommands<SlashCommands>(1047929615827619890); //Insert your server Id here. For testing the commands immediately.
+            slashCommandsConfig.RegisterCommands<SlashCommands>(GuildID); //Insert your server Id here. For testing the commands immediately.
             slashCommandsConfig.RegisterCommands<SlashCommands>(); //Global registration of commands, but take up to 24 hours to fulfill.
 
             //Connects client
