@@ -14,14 +14,15 @@ namespace Storytime_Bot
 {
     public class Bot
     {
-        //Fields
+        //Properties
         public DiscordClient Client { get; private set; }
         public CommandsNextExtension Commands { get; private set; }
 
         //Methods
+        //Reads from the config.json file to set the client, registers commands, and connects to discord.
         public async Task RunAsync()
         {
-            //Load config and intialize
+            //Loads config and intializes
             var json = string.Empty;
             string relativePath = Path.Combine("..", "..", "config.json");
             using (var fs = File.OpenRead(relativePath))
@@ -38,25 +39,19 @@ namespace Storytime_Bot
                 AutoReconnect = true,
             };
 
+            //New client with config
             Client = new DiscordClient(config);
+
+            //Set timeout
             Client.UseInteractivity(new InteractivityConfiguration()
             {
-                Timeout = TimeSpan.FromMinutes(1)
+                Timeout = TimeSpan.FromMinutes(5)
             });
 
-            var commandsConfig = new CommandsNextConfiguration()
-            {
-                StringPrefixes = new string[] { configJson.Prefix },
-                EnableMentionPrefix = true,
-                EnableDms = true,
-                EnableDefaultHelp = false,
-            };
-
-            //Register Command to a specified guild.
-            Commands = Client.UseCommandsNext(commandsConfig);
+            //Register slash commands to a specified guild.
             var slashCommandsConfig = Client.UseSlashCommands();
-            slashCommandsConfig.RegisterCommands<RollCommands>(guildId); //Insert your server Id here. For testing the commands immediately.
-            slashCommandsConfig.RegisterCommands<RollCommands>(); //Global registration of commands, but take up to 24 hours to fulfill.
+            slashCommandsConfig.RegisterCommands<SlashCommands>(1047929615827619890); //Insert your server Id here. For testing the commands immediately.
+            slashCommandsConfig.RegisterCommands<SlashCommands>(); //Global registration of commands, but take up to 24 hours to fulfill.
 
             //Connects client
             await Client.ConnectAsync();
