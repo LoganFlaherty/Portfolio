@@ -6,7 +6,5 @@ namespace Storytime_Bot
     {
         [JsonProperty("Token")]
         public string Token { get; set; }
-        [JsonProperty("Prefix")]
-        public string Prefix { get; set; }
     }
 }
