@@ -146,19 +146,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bot.cs" />
-    <Compile Include="Commands\Character.cs" />
-    <Compile Include="Commands\RollCommands.cs" />
+    <Compile Include="Commands\CharactersJSON.cs" />
+    <Compile Include="Commands\SlashCommands.cs" />
     <Compile Include="ConfigJSON.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Commands\character_data.json" />
     <None Include="config.json" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\CharacterData\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
