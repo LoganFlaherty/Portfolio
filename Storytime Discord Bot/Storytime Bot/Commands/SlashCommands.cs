@@ -6,7 +6,6 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System;
-using System.Xml.Linq;
 
 namespace Storytime_Bot.Commands
 {
